@@ -3,7 +3,7 @@ pipeline {
     
     environment {
         DOCKER_COMPOSE_FILE_NAME = 'docker-compose.yml'
-        ENV_FILE = '.env'  // Ensure the env file is passed correctly if needed
+        ENV_FILE = 'env'  // Ensure the env file is passed correctly if needed
     }
     
     stages {
@@ -11,7 +11,7 @@ pipeline {
             steps {
                 script {
                     // Stop and remove containers, networks, and orphaned containers
-                    sh "docker compose ${ENV_FILE} -f ${DOCKER_COMPOSE_FILE_NAME} down --remove-orphans"
+                    sh "docker compose --env-file ${ENV_FILE} -f ${DOCKER_COMPOSE_FILE_NAME} down --remove-orphans"
                 }
             }
         }
@@ -20,7 +20,7 @@ pipeline {
             steps {
                 script {
                     // Start the services in detached mode
-                    sh "docker compose ${ENV_FILE} -f ${DOCKER_COMPOSE_FILE_NAME} up -d"
+                    sh "docker compose --env-file ${ENV_FILE} -f ${DOCKER_COMPOSE_FILE_NAME} up -d"
                 }
             }
         }
