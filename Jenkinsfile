@@ -67,19 +67,19 @@ pipeline {
     //         }
     //     }
 
-        // stage('Check ELK Stack Health') {
-        //     steps {
-        //         script {
-        //             // Check Elasticsearch cluster health
-        //             def esHealth = sh(script: "docker exec es01 curl -s http://localhost:9200/_cluster/health?pretty", returnStdout: true).trim()
-        //             echo "Elasticsearch Health: ${esHealth}"
+        stage('Check ELK Stack Health') {
+            steps {
+                script {
+                    // Check Elasticsearch cluster health
+                    def esHealth = sh(script: "docker exec es01 -- curl -s http://localhost:9200/_cluster/health?pretty", returnStdout: true).trim()
+                    echo "Elasticsearch Health: ${esHealth}"
                     
-        //             // Check Kibana health
-        //             def kibanaHealth = sh(script: "docker exec kibana curl -s http://localhost:5601/api/status | jq .status", returnStdout: true).trim()
-        //             echo "Kibana Health: ${kibanaHealth}"
-        //         }
-        //     }
-        // }
+                    // Check Kibana health
+                    def kibanaHealth = sh(script: "docker exec kibana -- curl -s http://localhost:5601/api/status | jq .status", returnStdout: true).trim()
+                    echo "Kibana Health: ${kibanaHealth}"
+                }
+            }
+        }
 
     }
 
