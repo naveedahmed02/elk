@@ -71,7 +71,7 @@ pipeline {
             steps {
                 script {
                     // Check Elasticsearch cluster health
-                    def esHealth = sh(script: "docker compose exec -T elasticsearch curl -s http://localhost:9200/_cluster/health?pretty", returnStdout: true).trim()
+                    def esHealth = sh(script: "docker compose exec -T es01 curl -s https://localhost:9200/_cluster/health?pretty", returnStdout: true).trim()
                     echo "Elasticsearch Health: ${esHealth}"
                     
                     // Check Kibana health
