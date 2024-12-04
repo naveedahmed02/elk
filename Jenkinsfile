@@ -3,7 +3,7 @@ pipeline {
     environment {
         // Path to your docker-compose.yml and .env files
         COMPOSE_FILE = 'docker-compose.yml'
-        ENV_FILE = 'env'
+        ENV_FILE = '.env'
     }
 
     stages {
