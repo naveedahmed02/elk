@@ -3,7 +3,7 @@ pipeline {
     
     environment {
         DOCKER_COMPOSE_FILE_NAME = 'docker-compose.yml'
-        ENV_FILE = 'env'  // Ensure the env file is passed correctly if needed
+        ENV_FILE = '.env'  // Ensure the env file is passed correctly if needed
     }
     
     stages {
