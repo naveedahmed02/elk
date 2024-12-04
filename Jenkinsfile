@@ -9,22 +9,22 @@ pipeline {
     stages {
         // stage('Pulling latest images') {
         //     steps {
-        //         sh "docker-compose --env-file .env -f ${env.DOCKER_COMPOSE_FILE_NAME} pull"
+        //         sh "docker-compose ${ENV_FILE} -f ${env.DOCKER_COMPOSE_FILE_NAME} pull"
         //     }
         // }
         stage('Stopping all services') {
             steps {
-                sh "docker-compose --env-file .env -f ${env.DOCKER_COMPOSE_FILE_NAME} down --remove-orphans"
+                sh "docker-compose ${ENV_FILE} -f ${DOCKER_COMPOSE_FILE_NAME} down --remove-orphans"
             }
         }
         stage('Starting Dependencies') {
             steps {
-                sh "docker-compose --env-file .env -f ${env.DOCKER_COMPOSE_FILE_NAME} run start_dependencies"
+                sh "docker-compose ${ENV_FILE} -f ${DOCKER_COMPOSE_FILE_NAME} run start_dependencies"
             }
         }
         stage('Starting all services') {
             steps {
-                sh "docker-compose --env-file .env -f ${env.DOCKER_COMPOSE_FILE_NAME} up -d"
+                sh "docker-compose -${ENV_FILE} -f ${DOCKER_COMPOSE_FILE_NAME} up -d"
             }
         }
     }
