@@ -1,5 +1,5 @@
 pipeline {
-    agent { label 'any' }
+    agent any
     
     environment {
         DOCKER_COMPOSE_FILE_NAME = 'docker-compose.yml'
