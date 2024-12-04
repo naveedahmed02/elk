@@ -87,7 +87,7 @@ pipeline {
         always {
             // Clean up after the pipeline execution
             echo 'Cleaning up Docker containers'
-            sh 'docker-compose down || true'
+            sh 'docker compose down || true'
         }
 
         success {
