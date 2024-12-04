@@ -37,6 +37,16 @@ pipeline {
                 }
             }
         }
+        
+        stage('Install curl') {
+            steps {
+                script {
+                    // Install curl if it's not already installed
+                    sh 'apt-get update && apt-get install -y curl'
+                }
+            }
+        }
+
 
         stage('Build and Start ELK Stack') {
             steps {
@@ -47,25 +57,25 @@ pipeline {
             }
         }
 
-    //     stage('Wait for ELK Stack to be Ready') {
-    //         steps {
-    //             script {
-    //                 // Wait for Elasticsearch to be ready
-    //                 waitUntil {
-    //                     def esResponse = sh(script: "docker exec es01 curl -s -o /dev/null -w '%{http_code}' http://localhost:9200", returnStdout: true).trim()
-    //                     return esResponse == '200'
-    //                 }
-    //                 echo 'Elasticsearch is up and running.'
+        stage('Wait for ELK Stack to be Ready') {
+            steps {
+                script {
+                    // Wait for Elasticsearch to be ready
+                    waitUntil {
+                        def esResponse = sh(script: "docker exec es01 curl -s -o /dev/null -w '%{http_code}' http://localhost:9200", returnStdout: true).trim()
+                        return esResponse == '200'
+                    }
+                    echo 'Elasticsearch is up and running.'
                     
-    //                 // Wait for Kibana to be ready
-    //                 waitUntil {
-    //                     def kibanaResponse = sh(script: "docker exec kibana curl -s -o /dev/null -w '%{http_code}' http://localhost:5601", returnStdout: true).trim()
-    //                     return kibanaResponse == '200'
-    //                 }
-    //                 echo 'Kibana is up and running.'
-    //             }
-    //         }
-    //     }
+                    // Wait for Kibana to be ready
+                    waitUntil {
+                        def kibanaResponse = sh(script: "docker exec kibana curl -s -o /dev/null -w '%{http_code}' http://localhost:5601", returnStdout: true).trim()
+                        return kibanaResponse == '200'
+                    }
+                    echo 'Kibana is up and running.'
+                }
+            }
+        }
 
         stage('Check ELK Stack Health') {
             steps {
@@ -83,19 +93,19 @@ pipeline {
 
     }
 
-    // post {
-    //     always {
-    //         // Clean up after the pipeline execution
-    //         echo 'Cleaning up Docker containers'
-    //         sh 'docker compose down || true'
-    //     }
+    post {
+        always {
+            // Clean up after the pipeline execution
+            echo 'Cleaning up Docker containers'
+            sh 'docker compose down || true'
+        }
 
-    //     success {
-    //         echo 'ELK Stack is successfully deployed and healthy!'
-    //     }
+        success {
+            echo 'ELK Stack is successfully deployed and healthy!'
+        }
 
-    //     failure {
-    //         echo 'ELK Stack deployment failed!'
-    //     }
-    // }
+        failure {
+            echo 'ELK Stack deployment failed!'
+        }
+    }
 }
