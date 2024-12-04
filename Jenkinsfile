@@ -2,7 +2,7 @@ pipeline {
     environment {
         DOCKER_COMPOSE_FILE_NAME = 'docker-compose.yml'
         // DEPLOYMENT_NAME = 'psw-deployment'
-        ENV_FILE = env
+        ENV_FILE = 'env'
     }
     agent { label 'qa' }
     
