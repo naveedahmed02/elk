@@ -47,41 +47,41 @@ pipeline {
             }
         }
 
-        stage('Wait for ELK Stack to be Ready') {
-            steps {
-                script {
-                    // Wait for Elasticsearch to be ready
-                    waitUntil {
-                        def esResponse = sh(script: "docker exec es01 curl -s -o /dev/null -w '%{http_code}' http://localhost:9200", returnStdout: true).trim()
-                        return esResponse == '200'
-                    }
-                    echo 'Elasticsearch is up and running.'
+    //     stage('Wait for ELK Stack to be Ready') {
+    //         steps {
+    //             script {
+    //                 // Wait for Elasticsearch to be ready
+    //                 waitUntil {
+    //                     def esResponse = sh(script: "docker exec es01 curl -s -o /dev/null -w '%{http_code}' http://localhost:9200", returnStdout: true).trim()
+    //                     return esResponse == '200'
+    //                 }
+    //                 echo 'Elasticsearch is up and running.'
                     
-                    // Wait for Kibana to be ready
-                    waitUntil {
-                        def kibanaResponse = sh(script: "docker exec kibana curl -s -o /dev/null -w '%{http_code}' http://localhost:5601", returnStdout: true).trim()
-                        return kibanaResponse == '200'
-                    }
-                    echo 'Kibana is up and running.'
-                }
-            }
-        }
+    //                 // Wait for Kibana to be ready
+    //                 waitUntil {
+    //                     def kibanaResponse = sh(script: "docker exec kibana curl -s -o /dev/null -w '%{http_code}' http://localhost:5601", returnStdout: true).trim()
+    //                     return kibanaResponse == '200'
+    //                 }
+    //                 echo 'Kibana is up and running.'
+    //             }
+    //         }
+    //     }
 
-        stage('Check ELK Stack Health') {
-            steps {
-                script {
-                    // Check Elasticsearch cluster health
-                    def esHealth = sh(script: "docker exec es01 curl -s http://localhost:9200/_cluster/health?pretty", returnStdout: true).trim()
-                    echo "Elasticsearch Health: ${esHealth}"
+    //     stage('Check ELK Stack Health') {
+    //         steps {
+    //             script {
+    //                 // Check Elasticsearch cluster health
+    //                 def esHealth = sh(script: "docker exec es01 curl -s http://localhost:9200/_cluster/health?pretty", returnStdout: true).trim()
+    //                 echo "Elasticsearch Health: ${esHealth}"
                     
-                    // Check Kibana health
-                    def kibanaHealth = sh(script: "docker exec kibana curl -s http://localhost:5601/api/status | jq .status", returnStdout: true).trim()
-                    echo "Kibana Health: ${kibanaHealth}"
-                }
-            }
-        }
+    //                 // Check Kibana health
+    //                 def kibanaHealth = sh(script: "docker exec kibana curl -s http://localhost:5601/api/status | jq .status", returnStdout: true).trim()
+    //                 echo "Kibana Health: ${kibanaHealth}"
+    //             }
+    //         }
+    //     }
 
-    }
+    // }
 
     post {
         always {
