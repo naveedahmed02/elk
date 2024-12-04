@@ -52,7 +52,7 @@ pipeline {
                 script {
                     // Wait for Elasticsearch to be ready
                     waitUntil {
-                        def esResponse = sh(script: "docker compose exec -T elasticsearch curl -s -o /dev/null -w '%{http_code}' http://localhost:9200", returnStdout: true).trim()
+                        def esResponse = sh(script: "docker compose exec -T es01 curl -s -o /dev/null -w '%{http_code}' http://localhost:9200", returnStdout: true).trim()
                         return esResponse == '200'
                     }
                     echo 'Elasticsearch is up and running.'
