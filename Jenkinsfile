@@ -20,7 +20,8 @@ pipeline {
         stage('Checkout Code') {
             steps {
                 // Checkout code from the repository
-                git checkout master
+                checkout scm
+
             }
         }
 
