@@ -83,19 +83,19 @@ pipeline {
 
     }
 
-    post {
-        always {
-            // Clean up after the pipeline execution
-            echo 'Cleaning up Docker containers'
-            sh 'docker compose down || true'
-        }
+    // post {
+    //     always {
+    //         // Clean up after the pipeline execution
+    //         echo 'Cleaning up Docker containers'
+    //         sh 'docker compose down || true'
+    //     }
 
-        success {
-            echo 'ELK Stack is successfully deployed and healthy!'
-        }
+    //     success {
+    //         echo 'ELK Stack is successfully deployed and healthy!'
+    //     }
 
-        failure {
-            echo 'ELK Stack deployment failed!'
-        }
-    }
+    //     failure {
+    //         echo 'ELK Stack deployment failed!'
+    //     }
+    // }
 }
