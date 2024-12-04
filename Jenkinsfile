@@ -42,7 +42,7 @@ pipeline {
             steps {
                 script {
                     // Install curl if it's not already installed
-                    sh 'apt-get update && apt-get install -y curl'
+                    sh 'sudo apt-get update && sudo apt-get install -y curl'
                 }
             }
         }
