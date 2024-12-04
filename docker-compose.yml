@@ -21,8 +21,7 @@ networks:
 
 services:
  setup:
-    # image: docker.elastic.co/elasticsearch/elasticsearch:${STACK_VERSION}
-    image: harbor-dc.psw.gov.pk/elk2/elasticsearch:${STACK_VERSION}
+    image: docker.elastic.co/elasticsearch/elasticsearch:${STACK_VERSION}
     volumes:
       - certs:/usr/share/elasticsearch/config/certs
     user: "0"
@@ -89,8 +88,7 @@ services:
    depends_on:
      setup:
        condition: service_healthy 
-  #  image: docker.elastic.co/elasticsearch/elasticsearch:${STACK_VERSION}
-   image: harbor-dc.psw.gov.pk/elk2/elasticsearch:${STACK_VERSION}
+   image: docker.elastic.co/elasticsearch/elasticsearch:${STACK_VERSION}
    container_name: es01
    labels:
      co.elastic.logs/module: elasticsearch
@@ -139,8 +137,7 @@ services:
    depends_on:
      es01:
        condition: service_healthy
-  #  image: docker.elastic.co/kibana/kibana:${STACK_VERSION}
-   image: harbor-dc.psw.gov.pk/elk2/kibana:${STACK_VERSION}
+   image: docker.elastic.co/kibana/kibana:${STACK_VERSION}
    container_name: kibana
    labels:
      co.elastic.logs/module: kibana
@@ -179,8 +176,7 @@ services:
        condition: service_healthy
      kibana:
        condition: service_healthy
-  #  image: docker.elastic.co/logstash/logstash:${STACK_VERSION}
-   image: harbor-dc.psw.gov.pk/elk2/logstash:${STACK_VERSION}
+   image: docker.elastic.co/logstash/logstash:${STACK_VERSION}
    container_name: logstash
    labels:
      co.elastic.logs/module: logstash
