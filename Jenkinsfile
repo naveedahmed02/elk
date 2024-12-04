@@ -12,7 +12,7 @@ pipeline {
                 script {
                     // Clean up any old Docker containers or networks
                     sh 'docker compose down || true'
-                    sh 'docker system prune -f || true'
+                    // sh 'docker system prune -f || true'
                 }
             }
         }
