@@ -1,3 +1,4 @@
+DEPLOYMENT_NAME = "elk-deployment"
 DOCKER_COMPOSE_FILE_NAME="docker-compose.yml"
 
 echo "The service list is:" 
