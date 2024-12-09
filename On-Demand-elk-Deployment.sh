@@ -1,5 +1,5 @@
 DEPLOYMENT_NAME = "elk-deployment"
-DOCKER_COMPOSE_FILE_NAME="docker-compose.yml"
+DOCKER_COMPOSE_FILE_NAME = "docker-compose.yml"
 ENV_FILE = "env"
 
 echo "The service list is:" 
