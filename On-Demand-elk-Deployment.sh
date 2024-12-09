@@ -9,6 +9,6 @@ echo $list
 echo "The following files can be seen:"
 ls -ltrh
 
-docker compose --env-file ${ENV_FILE} -f ${DOCKER_COMPOSE_FILE_NAME} pull $list
+# docker compose --env-file ${ENV_FILE} -f ${DOCKER_COMPOSE_FILE_NAME} pull $list
 docker compose --env-file ${ENV_FILE} -f ${DOCKER_COMPOSE_FILE_NAME} down --remove-orphans -v $list
 docker compose --env-file ${ENV_FILE} -f ${DOCKER_COMPOSE_FILE_NAME} up -d $list
