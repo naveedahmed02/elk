@@ -8,14 +8,6 @@ pipeline {
     }
     
     stages {
-        stage('Checkout') {
-            steps {
-                script {
-                    echo "Cloning repository..."
-                    checkout scm
-                }
-            }
-        }
         stage('Stopping all services') {
             steps {
                 script {             
