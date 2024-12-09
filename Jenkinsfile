@@ -2,9 +2,9 @@ pipeline {
     agent any
     
     environment {
-        DOCKER_COMPOSE_FILE_NAME = 'docker-compose.yml'
-        DEPLOYMENT_NAME = 'elk-deployment'
-        ENV_FILE = 'env'
+        DOCKER_COMPOSE_FILE_NAME='docker-compose.yml'
+        DEPLOYMENT_NAME='elk-deployment'
+        ENV_FILE='env'
     }
     
     stages {
