@@ -4,7 +4,7 @@ pipeline {
     environment {
         DOCKER_COMPOSE_FILE_NAME = 'docker-compose.yml'
         DEPLOYMENT_NAME = 'elk-deployment'
-        // ENV_FILE = 'env'
+        ENV_FILE = 'env'
     }
     
     stages {
